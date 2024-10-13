@@ -18,10 +18,10 @@ private:
     std::string target;
     std::string alphabet;
 
-    std::string generateRandomPhrase();
-
 public:
     Monkey();
+
+    std::string generate_string();
 };
 
 #endif //MONKEY_H

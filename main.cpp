@@ -6,28 +6,29 @@
 #include <iostream>
 #include <random>
 
-int main()
-{
+std::string generate_string(std::string& str_typed, const int size) {
     std::random_device rd;
-    const std::string target = "que loucura";
+    for (int i = 0; i < size; i++) {
+        std::uniform_int_distribution<> dist(0,27);
+        const int random = dist(rd);
+        (random < 26) ? str_typed += static_cast<char>('a' + random) : str_typed += ' ';
+    }
+    return str_typed;
+}
+
+std::string find_phrase() {
+
+}
+
+int main(){
+    const std::string target = "louco";
     const int size = target.size();
     std::string str_typed;
     int attempts = 0;
 
     while (target != str_typed) {
         str_typed.clear();
-
-        for (int i = 0; i < size; i++) {
-            std::uniform_int_distribution<> dist(0,27);
-            const int random = dist(rd);
-
-            (random < 26) ? str_typed += static_cast<char>('a' + random) : str_typed += ' ';
-            // if ( random < 26 ) {
-            //     std::cout << random << " is " << static_cast<char>('a' + random) << std::endl;
-            // }else{
-            //     std::cout << random << " is \' \'" << std::endl;
-            // }
-        }
+        generate_string(str_typed, size);
         attempts++;
     }
 

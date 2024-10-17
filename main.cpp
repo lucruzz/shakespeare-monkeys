@@ -3,6 +3,7 @@
 ** Created on: September 13, 2024
 ** Author: Lucas Da Cruz Silva
  */
+#include <chrono>
 #include <iostream>
 #include <random>
 #include <vector>
@@ -35,15 +36,22 @@ std::pair<int, std::string> find_phrase(const std::string& target) {
 int main(){
 
     std::string target;
-    std::cout << "Write a sentence: ";
+    std::cout << "Write a sentence  : ";
     std::getline(std::cin, target);
+
+    const auto start_time = std::chrono::high_resolution_clock::now();
 
     auto [fst, snd] = find_phrase(target);
     // this is the same "std::pair<int, std::string> res = find_phrase(target);"
 
-    std::cout << "Target sentence: \"" << target << "\"" << std::endl;
+    const auto end_time = std::chrono::high_resolution_clock::now();
+
+    const auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+
+    std::cout << "Target sentence   : \"" << target << "\"" << std::endl;
     std::cout << "Number of attempts: " << fst << std::endl;
-    std::cout << "Typed sentence: " << snd << std::endl;
+    std::cout << "Typed sentence    : " << snd << std::endl;
+    std::cout << "Elapsed time      : " << duration.count() << " milliseconds" << std::endl;
 
     return 0;
 }

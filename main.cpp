@@ -5,6 +5,7 @@
  */
 #include <iostream>
 #include <random>
+#include <vector>
 
 std::string generate_string(std::string& str_typed, const int size) {
     std::random_device rd;
@@ -16,12 +17,7 @@ std::string generate_string(std::string& str_typed, const int size) {
     return str_typed;
 }
 
-std::string find_phrase() {
-
-}
-
-int main(){
-    const std::string target = "louco";
+std::pair<int, std::string> find_phrase(const std::string& target) {
     const int size = target.size();
     std::string str_typed;
     int attempts = 0;
@@ -31,10 +27,23 @@ int main(){
         generate_string(str_typed, size);
         attempts++;
     }
+    std::pair<int, std::string> result(attempts, str_typed);
 
-    std::cout << "Frase alvo: \"" << target << "\"" << std::endl;
-    std::cout << "Número de tentativas: " << attempts << std::endl;
-    std::cout << "Frase digitada: " << str_typed << std::endl;
+    return result;
+}
+
+int main(){
+
+    std::string target;
+    std::cout << "Write a sentence: ";
+    std::getline(std::cin, target);
+
+    auto [fst, snd] = find_phrase(target);
+    // this is the same "std::pair<int, std::string> res = find_phrase(target);"
+
+    std::cout << "Target sentence: \"" << target << "\"" << std::endl;
+    std::cout << "Number of attempts: " << fst << std::endl;
+    std::cout << "Typed sentence: " << snd << std::endl;
 
     return 0;
 }

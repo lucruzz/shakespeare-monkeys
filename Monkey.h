@@ -22,6 +22,7 @@ public:
     Monkey();
 
     std::string generate_string();
+    std::string find_phrase();
 };
 
 #endif //MONKEY_H
